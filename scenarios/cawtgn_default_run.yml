@@ -1,0 +1,41 @@
+
+model:
+    model_id: cawtgn_default # label of the run to distinguish the model in the logs 
+    architecture: CAWTGN # choose from the model dict in scenarios.py
+    config: # any parameters to go into model's config are below
+        force_cpu: False  
+        n_epoch: 30
+        n_layer: 1
+        use_caw: True
+        caw_layers: 1
+        caw_neighbors: ['8', '2']
+        use_caw_lstm: False
+    data_mode: 'transaction' #options are 
+batch_params:
+    universal: # you can provide universal batch parametrizations here, which will apply to train val and test. If you want them to be different - leave this empty and fill out train-val-test sections
+        batch_size: 200 # [int or float] - int for batchsize, float for fraction. Refer to the data manual for details
+        divide_by: edge_ix # possible values: {'edge_ix','time_stamp','time_window'} - what to use as a basis to divide into batches.  Refer to the data manual for details
+    train:
+        batch_size: 
+        divide_by: 
+    val:
+        batch_size: 
+        divide_by: 
+    test:
+        batch_size: 
+        divide_by: 
+
+split_params:
+    - 0.7 # train fraction of the dataset
+    - 0.8 # train+val fraction of the dataset
+node_mask_frac: 0.7 # fraction of nodes to be masked
+edge_mask_frac: 0.7 #fraction of edges to be masked 
+
+data_params:
+    randomize_features: false # whether to randomize node features 
+    fetcher: transact # possible values: {transact} - specifies data reader/preprocessor
+    dataset_name: eth_data_300k #specifies dataset name to be found in data directory
+    bipartite: true #whether or graph is bipartite or not
+t_i_setting: ti # possible values: {t, i, ti } - whether to run transductive, inductive or both settings
+
+
