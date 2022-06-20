@@ -11,6 +11,7 @@ from models.tgn.tgn_wrapper import TGNWrapper
 from models.tgn_new.tgn_wrapper import TGNCAWWrapper
 from models.tdgnn.tdgnn_wrapper import TDGNNWrapper
 from models.CAW.caw_wrapper import CAWWrapper
+from models.TI_GNN.ti_gnn_wrapper import TiGNNWrapper
 
 
 from itertools import product
@@ -117,128 +118,128 @@ batch_param_settings = {
     #    'description': 'Yelp dataset; Train, val and test are batched monthly.',
     #    'big_batch_included':False,
     # },
-    'wikipedia  50%+daily':{
-        'train':{
-            'batch_size':None,
-            'batch_spec':[0.5, *[seconds_in_day for _ in range(2000)] ],
-            'divide_by':'time_window',
-        },
-        'val':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'test':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'description': 'Wikipedia dataset; training dataset is batched in the following fashion: first batch contains half of the whole train sample, the rest are batched daily. Val and test are batched daily.',
-        'big_batch_included':True,
-        'data_params':{
-            'randomize_features':False,
-            'fetcher':'transact',
-            'dataset_name':'wikipedia',
-            }
-    },
-    'wikipedia daily':{
-        'train':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'val':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'test':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'description': 'Wikipedia dataset; Train, val and test are batched daily.',
-        'big_batch_included':False,
-        'data_params':{
-            'randomize_features':False,
-            'fetcher':'transact',
-            'dataset_name':'wikipedia',
-            },
-
-    },
-    'reddit  50%+daily':{
-        'train':{
-            'batch_size':None,
-            'batch_spec':[0.5, *[seconds_in_day for _ in range(2000)] ],
-            'divide_by':'time_window',
-        },
-        'val':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'test':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'description': 'Reddit dataset; training dataset is batched in the following fashion: first batch contains half of the whole train sample, the rest are batched daily. Val and test are batched daily.',
-        'big_batch_included':True,
-        'data_params':{
-            'randomize_features':False,
-            'fetcher':'transact',
-            'dataset_name':'reddit',
-            },
-
-    },
-    'reddit daily':{
-        'train':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'val':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'test':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'description': 'Reddit dataset; Train, val and test are batched daily.',
-        'big_batch_included':False,
-        'data_params':{
-            'randomize_features':False,
-            'fetcher':'transact',
-            'dataset_name':'reddit',
-            },
-    },
-    'yelp_sample weekly':{
-        'train':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day*7 for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'val':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day*7 for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'test':{
-            'batch_size':None,
-            'batch_spec':[seconds_in_day*7 for _ in range(2000)],
-            'divide_by':'time_window',
-        },
-        'description': 'Yelp dataset; Train, val and test are batched weekly.',
-        'big_batch_included':False,
-        'data_params':{
-            'randomize_features':False,
-            'fetcher':'transact',
-            'dataset_name':'yelp_sample',
-            },
-    },
+    # 'wikipedia  50%+daily':{
+    #     'train':{
+    #         'batch_size':None,
+    #         'batch_spec':[0.5, *[seconds_in_day for _ in range(2000)] ],
+    #         'divide_by':'time_window',
+    #     },
+    #     'val':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'test':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'description': 'Wikipedia dataset; training dataset is batched in the following fashion: first batch contains half of the whole train sample, the rest are batched daily. Val and test are batched daily.',
+    #     'big_batch_included':True,
+    #     'data_params':{
+    #         'randomize_features':False,
+    #         'fetcher':'transact',
+    #         'dataset_name':'wikipedia',
+    #         }
+    # },
+    # 'wikipedia daily':{
+    #     'train':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'val':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'test':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'description': 'Wikipedia dataset; Train, val and test are batched daily.',
+    #     'big_batch_included':False,
+    #     'data_params':{
+    #         'randomize_features':False,
+    #         'fetcher':'transact',
+    #         'dataset_name':'wikipedia',
+    #         },
+    #
+    # },
+    # 'reddit  50%+daily':{
+    #     'train':{
+    #         'batch_size':None,
+    #         'batch_spec':[0.5, *[seconds_in_day for _ in range(2000)] ],
+    #         'divide_by':'time_window',
+    #     },
+    #     'val':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'test':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'description': 'Reddit dataset; training dataset is batched in the following fashion: first batch contains half of the whole train sample, the rest are batched daily. Val and test are batched daily.',
+    #     'big_batch_included':True,
+    #     'data_params':{
+    #         'randomize_features':False,
+    #         'fetcher':'transact',
+    #         'dataset_name':'reddit',
+    #         },
+    #
+    # },
+    # 'reddit daily':{
+    #     'train':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'val':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'test':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'description': 'Reddit dataset; Train, val and test are batched daily.',
+    #     'big_batch_included':False,
+    #     'data_params':{
+    #         'randomize_features':False,
+    #         'fetcher':'transact',
+    #         'dataset_name':'reddit',
+    #         },
+    # },
+    # 'yelp_sample weekly':{
+    #     'train':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day*7 for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'val':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day*7 for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'test':{
+    #         'batch_size':None,
+    #         'batch_spec':[seconds_in_day*7 for _ in range(2000)],
+    #         'divide_by':'time_window',
+    #     },
+    #     'description': 'Yelp dataset; Train, val and test are batched weekly.',
+    #     'big_batch_included':False,
+    #     'data_params':{
+    #         'randomize_features':False,
+    #         'fetcher':'transact',
+    #         'dataset_name':'yelp_sample',
+    #         },
+    # },
     'uci 1perc':{
         'train':{
             'batch_size':0.01,
@@ -344,11 +345,12 @@ for param_set in dict_product(experimental_params):
 
 
 base_models = {
-    'TGN':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch'  :30}}, 'data_mode':'transaction'},
-    'Jodie':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch':30, 'memory_updater':'rnn', 'embedding_module':'time'}}, 'data_mode':'transaction'},
-    'DyRep':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch':30, 'memory_updater':'rnn', 'use_destination_embedding_in_message':True}}, 'data_mode':'transaction'},
-    'DefaultTDGNN': {'model': TDGNNWrapper, 'init_params': {'config': None}, 'data_mode':'transaction'},
-    'CAW': {'model': CAWWrapper, 'data_mode':'transaction', 'init_params':{'config':{'n_epoch':1, 'force_cpu':False, 'n_layer':1}, }}
+    # 'TGN':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch'  :30}}, 'data_mode':'transaction'},
+    # 'Jodie':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch':30, 'memory_updater':'rnn', 'embedding_module':'time'}}, 'data_mode':'transaction'},
+    # 'DyRep':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch':30, 'memory_updater':'rnn', 'use_destination_embedding_in_message':True}}, 'data_mode':'transaction'},
+    # 'DefaultTDGNN': {'model': TDGNNWrapper, 'init_params': {'config': None}, 'data_mode':'transaction'},
+    # 'CAW': {'model': CAWWrapper, 'data_mode':'transaction', 'init_params':{'config':{'n_epoch':1, 'force_cpu':False, 'n_layer':1}, }}
+    'TiGNNWrapper': {'model': TiGNNWrapper, 'data_mode':'transaction', 'init_params': {'config': {'n_epoch': 20, 'force_cpu':True}}, }
 }
 
 all_models = {
