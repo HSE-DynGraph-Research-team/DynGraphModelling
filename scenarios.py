@@ -11,7 +11,7 @@ from models.tgn.tgn_wrapper import TGNWrapper
 from models.tgn_new.tgn_wrapper import TGNCAWWrapper
 from models.tdgnn.tdgnn_wrapper import TDGNNWrapper
 from models.CAW.caw_wrapper import CAWWrapper
-
+from models.TI_DC_GNN.ti_dc_gnn_wrapper import TiDcGNNWrapper
 
 from itertools import product
 def dict_product(inp):
@@ -348,7 +348,8 @@ base_models = {
     'Jodie':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch':30, 'memory_updater':'rnn', 'embedding_module':'time'}}, 'data_mode':'transaction'},
     'DyRep':{'model':TGNWrapper, 'init_params':{'config':{'force_cpu':False, 'n_epoch':30, 'memory_updater':'rnn', 'use_destination_embedding_in_message':True}}, 'data_mode':'transaction'},
     'DefaultTDGNN': {'model': TDGNNWrapper, 'init_params': {'config': None}, 'data_mode':'transaction'},
-    'CAW': {'model': CAWWrapper, 'data_mode':'transaction', 'init_params':{'config':{'n_epoch':1, 'force_cpu':False, 'n_layer':1}, }}
+    'CAW': {'model': CAWWrapper, 'data_mode':'transaction', 'init_params':{'config':{'n_epoch':1, 'force_cpu':False, 'n_layer':1}, }},
+    'Ti_Dc_GNN': {'model': TiDcGNNWrapper, 'init_params': {}, 'data_mode':'transaction'}
 }
 
 all_models = {
